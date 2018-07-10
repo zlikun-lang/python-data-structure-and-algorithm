@@ -110,3 +110,24 @@ def is_palindromic_number(num):
 print(is_palindromic_number(12345654321))
 # True
 print(is_palindromic_number(1234554321))
+
+
+# 栈的应用，通过栈模拟递归函数调用过程，实现阶乘计算
+def not_recursion_factorial(num):
+    stack2 = LinkedStack()
+    # 入栈过程，[num, num - 1, num - 2, ..., 1]
+    while num > 0:
+        stack2.push(num)
+        num -= 1
+
+    # 出栈过程，执行计算：1 * ... * (num - 2) * (num - 1) * num
+    result = 1
+    while not stack2.is_empty():
+        result *= stack2.pop()
+
+    return result
+
+
+print(not_recursion_factorial(4) == 24)
+print(not_recursion_factorial(5) == 120)
+print(not_recursion_factorial(6) == 720)
