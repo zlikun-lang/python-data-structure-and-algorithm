@@ -81,3 +81,32 @@ try:
 except StackUnderflow as e:
     # in LinkedStack.pop()
     print(e)
+
+
+# 栈的应用，判断一组数字是否是回文数[12321, 12344321]
+def is_palindromic_number(num):
+    # 将数字转换为字符串(序列)
+    s = str(num)
+    length = len(s)
+
+    stack2 = LinkedStack()
+
+    # 由回文数的特征可知，其一半的反序等于另一半
+    for i in range(length // 2):
+        stack2.push(s[i])
+
+    # 依次出栈，取出入栈的数字，与右边部分比较
+    flag = True
+    # length - length // 2 是为了避免奇数位数字情形
+    for j in range(length - length // 2, length):
+        if stack2.pop() != s[j]:
+            flag = False
+            break
+
+    return flag
+
+
+# True
+print(is_palindromic_number(12345654321))
+# True
+print(is_palindromic_number(1234554321))
